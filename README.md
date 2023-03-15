@@ -503,7 +503,7 @@ if __name__ == "__main__":
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## **Visualise In Adminer**
-When going onto localhost :8080 you can see that all the data has successfully been loaded into the Database. Seen Below is the fact sales table with all the FK columns from the dimension tables. All highlighted so when clicking on a field, it will show in the dimensional table what is is representing seen below.
+When going onto localhost :8080 you can see that all the data has successfully been loaded into the Database. Seen Below is the fact sales table with all the FK columns from the dimension tables.
 
 ![image](https://user-images.githubusercontent.com/52333702/225462148-0fdaeb1b-c267-4d22-ab0b-b4e252a5a39c.png)
 
