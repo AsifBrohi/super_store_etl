@@ -89,6 +89,9 @@ The star schema represents the data model of the business, with the fact table a
 It is important to note that the star schema should not be based on a particular report. Instead, it should capture the essential facts and attributes of the business and be flexible enough to answer critical questions. Reports can be modelled downstream in a data mart or directly in a business intelligence tool.
 
 *Reference: Fundamentals of Data Engineering Plan and Build Robust Data Systems*
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Designing Database - Data Normalisation
 - **shipmodes Table**
     | ship_mode_id | ship_mode |
@@ -157,7 +160,7 @@ It is important to note that the star schema should not be based on a particular
 ### Database Schema - Final Database Schema 
 ![image](https://user-images.githubusercontent.com/52333702/225302318-df36dc5b-0797-48c4-ab30-a4b9f85f3b5f.png)
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## **Docker-compose**
 ```yaml
@@ -185,6 +188,8 @@ services:
 volumes:
   demo_db: 
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## **Python Scripts & Tests & PostgreSQL Queries**
 ### Turning CSV into DF
 ```python
@@ -215,6 +220,8 @@ def turn_into_df(file_path):
         return empty_data_error
 
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Cleansing Data 
 ```python
 def test_drop_columns():
@@ -236,6 +243,8 @@ def drop_columns(df,to_drop):
     except AssertionError as error:
         print(error)
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Transforming Data
 ```python
 def test_unique_value_df():
@@ -260,6 +269,8 @@ def unique_value_df(dataframe,col,column_name):
         print(error)
 
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Results of Tests
 
 ![image](https://user-images.githubusercontent.com/52333702/225459449-9ac92f04-724c-4c0d-b950-0abd30bcaf12.png)
@@ -358,6 +369,7 @@ insert_fact_table    =  """
             );
             """
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Loading Dimensional Data
 ```python
@@ -404,6 +416,8 @@ def load_sales_to_db(cursor, df,insert_query):
         print("Error: %s" % error)
         return
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## **Main Script to run Pipeline**
 ```python
 
@@ -486,14 +500,23 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## **Visualise In Adminer**
 When going onto localhost :8080 you can see that all the data has successfully been loaded into the Database. Seen Below is the fact sales table with all the FK columns from the dimension tables. All highlighted so when clicking on a field, it will show in the dimensional table what is is representing seen below.
+
 ![image](https://user-images.githubusercontent.com/52333702/225462148-0fdaeb1b-c267-4d22-ab0b-b4e252a5a39c.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## **Summary**
 In this mini-project, we demonstrate how to extract data from Kaggle using its API and normalize it for data modelling. By applying Test-Driven Development (TDD) principles, we ensure the reliability and accuracy of our data cleansing and transformation process. To load the transformed data into a database locally, we leverage Docker and Postgres, which allows us to scale our data operations as needed.
 
 My project showcases how data extraction and normalization are critical components of any data processing pipeline, and highlights the importance of TDD in ensuring data quality. By deploying our solution locally, we demonstrate how Docker and Postgres enable efficient management of data operations. In a follow-up blog, I will show how to take this process to the cloud and utilize Apache Airflow or prefact for further automation and scalability.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## **Improvements**
 Reflecting back I could add test for my running queries function and loading data functions to ensure data quality. Furthermore, have questions which the product owner needs answering so my database schema will be more fitting to answer business questions. Also, have some data analysis for example *what is the sub-category has the most sales in each region of USA?*
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
