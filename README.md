@@ -19,7 +19,7 @@
         </ul>
       </li>
     <li><a href="#docker-compose-%2D-Docker-compose-">Docker-compose</a></li>  
-    <li><a href="python-scripts-&-tests">Python Scripts & Tests</a>
+    <li><a href="python-scripts-&-tests-&-postgreSQL-queries">Python Scripts & Tests & PostgreSQL Queries</a>
       <ul>
        <li><a href="#Turing-csv-into-df">Turning CSV into DF</a></li>
        <li><a href="#cleansing-data">Cleansing Data</a></li>
