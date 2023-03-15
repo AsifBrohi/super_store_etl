@@ -488,6 +488,7 @@ if __name__ == "__main__":
 ```
 ## **Visualise In Adminer**
 When going onto localhost :8080 you can see that all the data has successfully been loaded into the Database. Seen Below is the fact sales table with all the FK columns from the dimension tables. All highlighted so when clicking on a field, it will show in the dimensional table what is is representing seen below.
+![image](https://user-images.githubusercontent.com/52333702/225462148-0fdaeb1b-c267-4d22-ab0b-b4e252a5a39c.png)
 
 ## **Summary**
 In this mini-project, we demonstrate how to extract data from Kaggle using its API and normalize it for data modelling. By applying Test-Driven Development (TDD) principles, we ensure the reliability and accuracy of our data cleansing and transformation process. To load the transformed data into a database locally, we leverage Docker and Postgres, which allows us to scale our data operations as needed.
