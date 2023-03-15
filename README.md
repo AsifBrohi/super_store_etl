@@ -25,6 +25,7 @@
        <li><a href="#cleansing-data">Cleansing Data</a></li>
        <li><a href="#transforming-data">Transforming Data</a></li>
        <li><a href="#results-of-tests">Results of Tests</a></li>
+       <li><a href="#PostgreSQL-Queries">PostgreSQL Queries</a></li>
        <li><a href="#running-queries">Running Queries</a></li>
        <li><a href="#loading-dimensional-data">Loading Dimensional Data</a></li>
        <li><a href="#loading-fact-data">Loading Fact Data</a></li>
@@ -33,6 +34,7 @@
     <li><a href="#main-script-to-run-pipeline">Main Script to run Pipeline</a></li>
     <li><a href="#visualise-in-adminer">Visualise In Adminer</a></li>
     <li><a href="#Summary">Summary</a></li>
+    <li><a href="#Improvments">Improvments</a></li>
   </ol>
 </details>
 
@@ -183,7 +185,7 @@ services:
 volumes:
   demo_db: 
 ```
-## **Python Scripts & Tests**
+## **Python Scripts & Tests & PostgreSQL Queries**
 ### Turning CSV into DF
 ```python
 # Happy Path 
@@ -261,6 +263,101 @@ def unique_value_df(dataframe,col,column_name):
 ### Results of Tests
 
 ![image](https://user-images.githubusercontent.com/52333702/225459449-9ac92f04-724c-4c0d-b950-0abd30bcaf12.png)
+
+## PostgreSQL Queries 
+```SQL
+shipping_table = '''CREATE table if NOT exists ship_mode(
+    ship_mode_id SERIAL primary key NOT NULL,
+    ship_mode VARCHAR(60) UNIQUE NOT NULL);'''
+region_table = '''CREATE table if NOT exists regions(
+    region_id SERIAL primary key NOT NULL,
+    region VARCHAR(60) UNIQUE NOT NULL
+);'''
+segment_table = '''CREATE table if NOT exists segments(
+    segment_id SERIAL primary key NOT NULL, 
+    segment VARCHAR(60) UNIQUE NOT NULL
+);
+'''
+city_table = '''CREATE table if NOT exists citys(
+    city_id SERIAL primary key NOT NULL,
+    city VARCHAR(100) UNIQUE NOT NULL
+);'''
+category_table = '''CREATE table if NOT exists category(
+    category_id SERIAL primary key NOT NULL, 
+    category VARCHAR(100) UNIQUE NOT NULL
+);'''
+
+sub_category_table = '''CREATE table if NOT exists sub_category(
+    sub_category_id SERIAL primary key NOT NULL, 
+    sub_category VARCHAR(100) UNIQUE NOT NULL
+);'''
+country_table = '''CREATE table if NOT exists country(
+    country_id SERIAL primary key NOT NULL, 
+    country VARCHAR(100) UNIQUE NOT NULL
+);'''
+
+state_table = '''CREATE table if NOT exists states(
+    state_id SERIAL primary key NOT NULL, 
+    state VARCHAR(100) UNIQUE NOT NULL
+);'''
+
+sales_fact = """CREATE TABLE IF NOT EXISTS sales_fact(
+    sale_id SERIAL PRIMARY KEY NOT NULL,
+    ship_mode_id INT NOT NULL,
+    segment_id INT NOT NULL,
+    country_id INT NOT NULL,
+    city_id INT NOT NULL,
+    state_id INT NOT NULL,
+    region_id INT NOT NULL,
+    category_id INT NOT NULL,
+    sub_category_id INT NOT NULL,
+    Sales MONEY NOT NULL,
+    Profit MONEY NOT NULL,
+
+    
+    CONSTRAINT fk_shipmodes
+        FOREIGN KEY(ship_mode_id)
+            REFERENCES ship_mode(ship_mode_id),
+    CONSTRAINT fk_segments
+        FOREIGN KEY(segment_id)
+            REFERENCES segments(segment_id),
+    CONSTRAINT fk_country
+        FOREIGN KEY(country_id)
+            REFERENCES country(country_id),
+    CONSTRAINT fk_cities
+        FOREIGN KEY(city_id)
+            REFERENCES citys(city_id), 
+    CONSTRAINT fk_states
+        FOREIGN KEY(state_id)
+            REFERENCES states(state_id),
+    CONSTRAINT fk_regions
+        FOREIGN KEY(region_id)
+            REFERENCES regions(region_id),            
+    CONSTRAINT fk_category
+        FOREIGN KEY(category_id)
+            REFERENCES category(category_id),
+    CONSTRAINT fk_sub_categorys
+        FOREIGN KEY(sub_category_id)
+            REFERENCES sub_category(sub_category_id)
+    );"""
+```
+```SQL
+insert_fact_table    =  """
+    INSERT INTO sales_fact(ship_mode_id, segment_id, country_id, city_id, state_id, region_id,category_id, sub_category_id,Sales,Profit) 
+        VALUES (
+            (SELECT ship_mode_id FROM ship_mode WHERE ship_mode = %s),
+            (SELECT segment_id FROM segments WHERE segment = %s),
+            (SELECT country_id FROM country WHERE country = %s),
+            (SELECT city_id FROM citys WHERE city = %s),
+            (SELECT state_id FROM states WHERE state = %s),
+            (SELECT region_id FROM regions WHERE region = %s),
+            (SELECT category_id FROM category WHERE category = %s),
+            (SELECT sub_category_id FROM sub_category WHERE sub_category = %s),
+            %s,
+            %s
+            );
+            """
+```
 
 ### Loading Dimensional Data
 ```python
@@ -394,4 +491,7 @@ When going onto localhost :8080 you can see that all the data has successfully b
 ## **Summary**
 In this mini-project, we demonstrate how to extract data from Kaggle using its API and normalize it for data modelling. By applying Test-Driven Development (TDD) principles, we ensure the reliability and accuracy of our data cleansing and transformation process. To load the transformed data into a database locally, we leverage Docker and Postgres, which allows us to scale our data operations as needed.
 
-My project showcases how data extraction and normalization are critical components of any data processing pipeline, and highlights the importance of TDD in ensuring data quality. By deploying our solution locally, we demonstrate how Docker and Postgres enable efficient management of data operations. In a follow-up blog, I will show how to take this process to the cloud and utilize Apache Airflow for further automation and scalability.
+My project showcases how data extraction and normalization are critical components of any data processing pipeline, and highlights the importance of TDD in ensuring data quality. By deploying our solution locally, we demonstrate how Docker and Postgres enable efficient management of data operations. In a follow-up blog, I will show how to take this process to the cloud and utilize Apache Airflow or prefact for further automation and scalability.
+
+## **Improvements**
+Reflecting back I could add test for my running queries function and loading data functions to ensure data quality. Furthermore, have questions which the product owner needs answering so my database schema will be more fitting to answer business questions. Also, have some data analysis for example what is the sub-category has the most sales in each region of USA?.
