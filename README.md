@@ -260,7 +260,7 @@ def unique_value_df(dataframe,col,column_name):
 ```
 ### Results of Tests
 
-![image](https://user-images.githubusercontent.com/52333702/225455835-40c2eeb6-5990-45ba-a1b8-bf82f4529b5f.png)
+![image](https://user-images.githubusercontent.com/52333702/225459449-9ac92f04-724c-4c0d-b950-0abd30bcaf12.png)
 
 ### Loading Dimensional Data
 ```python
