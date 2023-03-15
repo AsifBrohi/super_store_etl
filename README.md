@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-# **Group Project - SuperStore ETL Pipeline LocalHost**
+# **SuperStore Simple ETL Pipeline LocalHost**
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -27,8 +27,8 @@
        <li><a href="#running-queries">Running Queries</a></li>
        <li><a href="#loading-dimensional-data">Loading Dimensional Data</a></li>
        <li><a href="#loading-fact-data">Loading Fact Data</a></li>
-    <li><a href="main-script-to-run-pipeline">Main Script to run pipeline</a><li>
-    <li><a href="summary">Summary</a><li>
+    <li><a href="main-script-to-run-pipeline">Main Script to run pipeline</a>
+    <li><a href="summary">Summary</a>
   </ol>
 </details>
 
@@ -67,21 +67,86 @@ def extract_kaggle_api():
         | ----------- | ----------- |----------- | ----------- |----------- |----------- |----------- |----------- |----------- |----------- |----------- |----------- |----------- |
         | Second Class | Corporate | United States | Los Angeles | California | 90036 | West | Office Supplies | Labels | 14.6200 | 2 | 0.00 | 6.871 |
         | Standard Class | Consumer | United States | Henderson | Kentucky | 42420 | South | Furniture | Bookcases | 261.960 | 2 | 0.00 | 41.91 |
-    When looking at the data you can see there are many duplicate values inside the data frame. To remove all duplicate data we will need to normalise the data.
-    So I decided to create dimension tables for shipmode to sub_category columns as seen above there are duplicates in all of those columns. 
-    To visualise how approached this is seen below where each column has been normalised and finally a sales fact table
+When looking at the data you can see there are many duplicate values inside the data frame. To remove all duplicate data we will need to normalise the data.
+
+So I decided to create dimension tables for shipmode to sub_category columns as seen above there are duplicates in all of those columns. 
+To visualise how approached this is seen below where each column has been normalised and finally a sales fact table
 
 ## **Development Roadmap**
 ### Data Modelling - Dimension & Fact Tables
 Kimball
 In Kimball's data modelling approach, data is divided into two main types of tables: fact tables and dimension tables, which are organized in a star schema. The fact table stores quantitative, factual, and event-related data that is immutable since it relates to events. Thus, the fact table is append-only and should be at the lowest possible granularity. Fact tables are typically narrow and long, meaning they have few columns and many rows representing events.
+
 The second type of table in a Kimball data model is a dimension table, which provides reference data, attributes, and relational context for the events stored in the fact table. Dimension tables are shorter and wider than fact tables and are denormalized, allowing for duplicate data. When joined with a fact table, dimensions can provide details on the "what," "where," and "when" of events.
 The star schema represents the data model of the business, with the fact table at the centre, surrounded by relevant dimensions. Compared to highly normalized data models, the star schema requires fewer joins, resulting in faster query performance. Additionally, the star schema is easier for business users to understand and use.
+
 It is important to note that the star schema should not be based on a particular report. Instead, it should capture the essential facts and attributes of the business and be flexible enough to answer critical questions. Reports can be modelled downstream in a data mart or directly in a business intelligence tool.
+
 Reference: Fundamentals of Data Engineering Plan and Build Robust Data Systems
 ### Designing Database - Data Normalisation
+- **shipmodes Table**
+    | ship_mode_id | ship_mode |
+    | ----------- | ----------- |
+    | 1 | Standard Class |
+    | 2 | Second Class |
+    | 3 | First Class |
+    | 4 | Same Day |
 
-| Ship Mode | Segmenmt |
+ - **segments Table**
+    | segments_id | segments |
+    | ----------- | ----------- |
+    | 1 | Consumer |
+    | 2 | Corporate |
+    | 3 | Home Office |
+   
+
+ - **country Table**
+    | country _id | country |
+    | ----------- | ----------- |
+    | 1 | United States |
+
+
+ - **city Table**
+    | city_id | city |
+    | ----------- | ----------- |
+    | 1 | Henderson |
+    | 2 | Los Angeles |
+    | 3 | Concord |
+    | 4 | Seattle | 
+
+ - **state Table**
+    | state_id | state |
+    | ----------- | ----------- |
+    | 1 | Kentucky |
+    | 2 | California |
+    | 3 | Florida |
+    | 4 | Pennsylvania | 
+
+  - **regions Table**
+    | reigion_id | region |
+    | ----------- | ----------- |
+    | 1 | South |
+    | 2 | West |
+    | 3 | East |
+    | 4 | North |
+
+ - **category Table**
+    | category _id | category  |
+    | ----------- | ----------- |
+    | 1 | Furniture |
+    | 2 | Office Supplies |
+    | 3 | Technology |
+
+
+ - **sub-category Table**
+    | sub-category_id | sub-category |
+    | ----------- | ----------- |
+    | 1 | Bookcases |
+    | 2 | Chairs |
+    | 3 | Labels |
+    | 4 | Tables | 
+
+   
 
 ### Database Schema - Final Database Schema 
 
@@ -295,8 +360,3 @@ if __name__ == "__main__":
     main()
 ```
 ## **Summary**
-
-
-
-
-# super_store_etl
