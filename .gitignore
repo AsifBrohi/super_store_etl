@@ -1,0 +1,10 @@
+__pycash__
+venv/
+.venv/
+data_visualisation.ipynb
+**__pycache__/
+.history
+**/superstore_docker/demo_db
+.ipynb_checkpoints/
+**.pytest_cache/
+
