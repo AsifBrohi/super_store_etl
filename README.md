@@ -18,6 +18,7 @@
         <li><a href="#database-schema-%2D-final-database-schema-">Database Schema - Final Database Schema</a></li>
         </ul>
       </li>
+    <li><a href="#docker-compose-%2D-Docker-compose-">Docker-compose</a></li>  
     <li><a href="python-scripts-&-tests">Python Scripts & Tests</a>
       <ul>
        <li><a href="#Testing-function">Testing Functions</a></li>
@@ -27,8 +28,9 @@
        <li><a href="#running-queries">Running Queries</a></li>
        <li><a href="#loading-dimensional-data">Loading Dimensional Data</a></li>
        <li><a href="#loading-fact-data">Loading Fact Data</a></li>
-    <li><a href="main-script-to-run-pipeline">Main Script to run pipeline</a>
-    <li><a href="summary">Summary</a>
+      </li>
+    <li><a href="main-script-to-run-pipeline">Main Script to run pipeline</a></li>
+    <li><a href="summary">Summary</a></li>
   </ol>
 </details>
 
@@ -152,6 +154,33 @@ Reference: Fundamentals of Data Engineering Plan and Build Robust Data Systems
 
 
 
+## **Docker-compose**
+``yaml
+version: "3.1"
+services:
+  db:
+    image: postgres
+    container_name: super_store
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: postgres
+      
+    ports:
+      - 5432:5432
+    volumes:
+      -  ./demo_db:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    container_name: adminer_container_demo
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  demo_db:
+  
+```
 ## **Python Scripts & Tests**
 ### Testing Functions
 ```python
