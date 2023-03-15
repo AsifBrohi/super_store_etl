@@ -152,6 +152,7 @@ Reference: Fundamentals of Data Engineering Plan and Build Robust Data Systems
    
 
 ### Database Schema - Final Database Schema 
+![image](https://user-images.githubusercontent.com/52333702/225302318-df36dc5b-0797-48c4-ab30-a4b9f85f3b5f.png)
 
 
 
