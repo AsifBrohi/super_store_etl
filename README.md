@@ -24,7 +24,7 @@
        <li><a href="#Turing-csv-into-df">Turning CSV into DF</a></li>
        <li><a href="#cleansing-data">Cleansing Data</a></li>
        <li><a href="#transforming-data">Transforming Data</a></li>
-       <li><a href="#results-of-tests">Results of Tests</a></li>
+       <li><a href="#test-results">Tests Results</a></li>
        <li><a href="#PostgreSQL-Queries">PostgreSQL Queries</a></li>
        <li><a href="#running-queries">Running Queries</a></li>
        <li><a href="#loading-dimensional-data">Loading Dimensional Data</a></li>
@@ -80,7 +80,7 @@ To visualise how approached this is seen below where each column has been normal
 
 ## **Development Roadmap**
 ### Data Modelling - Dimension & Fact Tables
-Kimball
+#### Kimball
 In Kimball's data modelling approach, data is divided into two main types of tables: fact tables and dimension tables, which are organized in a star schema. The fact table stores quantitative, factual, and event-related data that is immutable since it relates to events. Thus, the fact table is append-only and should be at the lowest possible granularity. Fact tables are typically narrow and long, meaning they have few columns and many rows representing events.
 
 The second type of table in a Kimball data model is a dimension table, which provides reference data, attributes, and relational context for the events stored in the fact table. Dimension tables are shorter and wider than fact tables and are denormalized, allowing for duplicate data. When joined with a fact table, dimensions can provide details on the "what," "where," and "when" of events.
@@ -271,7 +271,7 @@ def unique_value_df(dataframe,col,column_name):
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Results of Tests
+### Test Results
 
 ![image](https://user-images.githubusercontent.com/52333702/225459449-9ac92f04-724c-4c0d-b950-0abd30bcaf12.png)
 
