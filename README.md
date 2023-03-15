@@ -21,16 +21,17 @@
     <li><a href="#docker-compose-%2D-Docker-compose-">Docker-compose</a></li>  
     <li><a href="python-scripts-&-tests">Python Scripts & Tests</a>
       <ul>
-       <li><a href="#Testing-function">Testing Functions</a></li>
        <li><a href="#Turing-csv-into-df">Turning CSV into DF</a></li>
        <li><a href="#cleansing-data">Cleansing Data</a></li>
        <li><a href="#transforming-data">Transforming Data</a></li>
+       <li><a href="#results-of-tests">Results of Tests</a></li>
        <li><a href="#running-queries">Running Queries</a></li>
        <li><a href="#loading-dimensional-data">Loading Dimensional Data</a></li>
        <li><a href="#loading-fact-data">Loading Fact Data</a></li>
        </ul>
       </li>
     <li><a href="#main-script-to-run-pipeline">Main Script to run Pipeline</a></li>
+    <li><a href="#visualise-in-adminer">Visualise In Adminer</a></li>
     <li><a href="#Summary">Summary</a></li>
   </ol>
 </details>
@@ -85,7 +86,7 @@ The star schema represents the data model of the business, with the fact table a
 
 It is important to note that the star schema should not be based on a particular report. Instead, it should capture the essential facts and attributes of the business and be flexible enough to answer critical questions. Reports can be modelled downstream in a data mart or directly in a business intelligence tool.
 
-Reference: Fundamentals of Data Engineering Plan and Build Robust Data Systems
+*Reference: Fundamentals of Data Engineering Plan and Build Robust Data Systems*
 ### Designing Database - Data Normalisation
 - **shipmodes Table**
     | ship_mode_id | ship_mode |
@@ -183,13 +184,13 @@ volumes:
   demo_db: 
 ```
 ## **Python Scripts & Tests**
-### Testing Functions
+### Turning CSV into DF
 ```python
-
+# Happy Path 
 def test_csv_into_df():
     file_path = "../data/SampleSuperstore.csv"
     assert type(turn_into_df(file_path)) == pd.DataFrame
-
+# Unhappy Path
 def test_file_missing():
     file_path = "../data/no.csv"
     assert type(turn_into_df(file_path)) == FileNotFoundError
@@ -197,31 +198,6 @@ def test_file_missing():
 def test_file_no_data():
     file_path = '../data/no_data.csv'
     assert type(turn_into_df(file_path)) == pd.errors.EmptyDataError
-
-def test_drop_columns():
-    test_df = df 
-    test_to_drop= ["Quantity","Discount","Postal Code"]
-    result_df = drop_columns(test_df,test_to_drop)
-    expected_df = clean_df
-    assert_frame_equal(result_df,expected_df)
-
-def test_unique_value_df():
-    # create a dataframe with some data
-    test_df = df
-    
-    # call the function with a valid column name
-    test_col_name = 'Ship Mode'
-    test_new_col_name = 'ship_mode'
-    result = unique_value_df(test_df, test_col_name, test_new_col_name)
-    
-    # check that the result dataframe has the expected values
-    expected_values = df_ship_mode
-    assert_frame_equal(result, expected_values)
-
-
-```
-### Turning CSV into DF
-```python
 
 def turn_into_df(file_path):
     """turning csv file into DF"""
@@ -239,6 +215,16 @@ def turn_into_df(file_path):
 ```
 ### Cleansing Data 
 ```python
+def test_drop_columns():
+    # creating test df
+    test_df = df 
+    # create test drop list
+    test_to_drop= ["Quantity","Discount","Postal Code"]
+    # call function
+    result_df = drop_columns(test_df,test_to_drop)
+    # check that result dataframe has expected values
+    expected_df = clean_df
+    assert_frame_equal(result_df,expected_df)
 
 def drop_columns(df,to_drop):
     """removing unwatnted columns"""
@@ -250,6 +236,16 @@ def drop_columns(df,to_drop):
 ```
 ### Transforming Data
 ```python
+def test_unique_value_df():
+    # create a dataframe with some data
+    test_df = df
+    # call the function with a valid column name
+    test_col_name = 'Ship Mode'
+    test_new_col_name = 'ship_mode'
+    result = unique_value_df(test_df, test_col_name, test_new_col_name)
+    # check that the result dataframe has the expected values
+    expected_values = df_ship_mode
+    assert_frame_equal(result, expected_values)
 
 def unique_value_df(dataframe,col,column_name):
     """Creating Df with only unique values to avoid duplication"""
@@ -262,6 +258,7 @@ def unique_value_df(dataframe,col,column_name):
         print(error)
 
 ```
+### Results of Tests
 ### Loading Dimensional Data
 ```python
 def run_query(conn, query):
@@ -389,4 +386,9 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+## **Visualise In Adminer**
+When going onto localhost :8080 you can see that all the data has successfully been loaded into the Database. Seen Below is the fact sales table with all the FK columns from the dimension tables. All highlighted so when clicking on a field, it will show in the dimensional table what is is representing seen below.
 ## **Summary**
+In this mini-project, we demonstrate how to extract data from Kaggle using its API and normalize it for data modelling. By applying Test-Driven Development (TDD) principles, we ensure the reliability and accuracy of our data cleansing and transformation process. To load the transformed data into a database locally, we leverage Docker and Postgres, which allows us to scale our data operations as needed.
+
+My project showcases how data extraction and normalization are critical components of any data processing pipeline, and highlights the importance of TDD in ensuring data quality. By deploying our solution locally, we demonstrate how Docker and Postgres enable efficient management of data operations. In a follow-up blog, I will show how to take this process to the cloud and utilize Apache Airflow for further automation and scalability.
