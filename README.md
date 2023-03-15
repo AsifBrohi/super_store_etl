@@ -28,9 +28,10 @@
        <li><a href="#running-queries">Running Queries</a></li>
        <li><a href="#loading-dimensional-data">Loading Dimensional Data</a></li>
        <li><a href="#loading-fact-data">Loading Fact Data</a></li>
+       </ul>
       </li>
-    <li><a href="main-script-to-run-pipeline">Main Script to run pipeline</a></li>
-    <li><a href="summary">Summary</a></li>
+    <li><a href="#main-script-to-run-pipeline">Main Script to run Pipeline</a></li>
+    <li><a href="#Summary">Summary</a></li>
   </ol>
 </details>
 
@@ -155,7 +156,7 @@ Reference: Fundamentals of Data Engineering Plan and Build Robust Data Systems
 
 
 ## **Docker-compose**
-``yaml
+```yaml
 version: "3.1"
 services:
   db:
@@ -178,8 +179,7 @@ services:
     ports:
       - 8080:8080
 volumes:
-  demo_db:
-  
+  demo_db: 
 ```
 ## **Python Scripts & Tests**
 ### Testing Functions
@@ -306,7 +306,7 @@ def load_sales_to_db(cursor, df,insert_query):
         print("Error: %s" % error)
         return
 ```
-## **Main Script to run pipeline**
+## **Main Script to run Pipeline**
 ```python
 
 # connecting to database 
