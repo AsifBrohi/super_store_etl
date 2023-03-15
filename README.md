@@ -259,6 +259,9 @@ def unique_value_df(dataframe,col,column_name):
 
 ```
 ### Results of Tests
+
+![image](https://user-images.githubusercontent.com/52333702/225455835-40c2eeb6-5990-45ba-a1b8-bf82f4529b5f.png)
+
 ### Loading Dimensional Data
 ```python
 def run_query(conn, query):
