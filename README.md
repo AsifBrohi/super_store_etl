@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-# **SuperStore Simple ETL Pipeline LocalHost**
+# **SuperStore Simple ETL Pipeline Using LocalHost**
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
