@@ -517,6 +517,6 @@ My project showcases how data extraction and normalization are critical componen
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## **Improvements**
-Reflecting back I could add test for my running queries function and loading data functions to ensure data quality. Furthermore, have questions which the product owner needs answering so my database schema will be more fitting to answer business questions. Also, have some data analysis for example *what is the sub-category has the most sales in each region of USA?*
+Reflecting back to improve my work, I need to prioritize tasks based on risk, collaborate closely with the product owner to understand their data needs, and be more specific in my tests and data analysis. This will improve the quality and relevance of my work, and add more value to the business.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
