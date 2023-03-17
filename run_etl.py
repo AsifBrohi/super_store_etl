@@ -8,16 +8,16 @@ from src.csv_df import df_country
 from src.csv_df import df_sub_category
 from src.csv_df import df_state
 from src.csv_df import clean_df
-from src.postgre_queries import insert_fact_table
-from src.postgre_queries import shipping_table
-from src.postgre_queries import region_table
-from src.postgre_queries import segment_table
-from src.postgre_queries import city_table
-from src.postgre_queries import category_table
-from src.postgre_queries import sub_category_table
-from src.postgre_queries import country_table
-from src.postgre_queries import state_table
-from src.postgre_queries import sales_fact
+from SQL_queries.postgre_queries import insert_fact_table
+from SQL_queries.postgre_queries import shipping_table
+from SQL_queries.postgre_queries import region_table
+from SQL_queries.postgre_queries import segment_table
+from SQL_queries.postgre_queries import city_table
+from SQL_queries.postgre_queries import category_table
+from SQL_queries.postgre_queries import sub_category_table
+from SQL_queries.postgre_queries import country_table
+from SQL_queries.postgre_queries import state_table
+from SQL_queries.postgre_queries import sales_fact
 # connecting to database 
 conn = psycopg2.connect(
 database="super_store",
